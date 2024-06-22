@@ -1,51 +1,31 @@
 import React, { useState } from "react";
-import Chat from "./comps/Chat";
-import "./App.css";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Chat from "./components/Chat";
 
 const App = () => {
-  const [userId, setUserId] = useState("");
-  const [userName, setUserName] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
 
-  const login = () => {
-    if (userId.trim() && userName.trim()) {
-      localStorage.setItem("userId", userId);
-      localStorage.setItem("userName", userName);
-      setLoggedIn(true);
-    }
+  const handleRegister = () => {
+    window.scrollTo({ bottom: 0, behavior: "smooth" });
+    console.log("Going");
   };
 
-  if (loggedIn) {
-    return <Chat />;
+  const handleLogin = (token) => {
+    localStorage.setItem("token", token);
+    setToken(token);
+  };
+
+  if (!token) {
+    return (
+      <div>
+        <Register onRegister={handleRegister} />
+        <Login onLogin={handleLogin} />
+      </div>
+    );
   }
 
-  return (
-    <div className="login-container">
-      <div className="login-box">
-        <h1>Login</h1>
-        <input
-          type="text"
-          placeholder="Enter your user ID"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
-        />
-        <input
-          type="text"
-          placeholder="Enter your name"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
-        />
-        <button
-          onClick={login}
-          style={{ padding: "10px 20px", cursor: "pointer" }}
-        >
-          Login
-        </button>
-      </div>
-    </div>
-  );
+  return <Chat token={token} />;
 };
 
 export default App;

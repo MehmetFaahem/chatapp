@@ -4,6 +4,25 @@ body {
   background-color: #f0f2f5;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f0f2f5;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /* Login Screen */
@@ -56,6 +75,7 @@ body {
   display: flex;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 
 /* Side Drawer */
@@ -88,11 +108,11 @@ body {
 
 /* Chat Window */
 .chat-window {
-  flex: 1;
   display: flex;
   flex-direction: column;
   padding: 20px;
   background-color: #e5ddd5;
+  min-width: 80%;
 }
 
 .chat-window h1 {
@@ -107,15 +127,20 @@ body {
 }
 
 .message {
+  display: flex;
+  flex-direction: column;
   padding: 10px;
   margin: 5px 0;
   border-radius: 5px;
   max-width: 60%;
+  white-space: pre-wrap; /* Ensures multiline text is displayed correctly */
+  word-wrap: break-word; /* Prevents overflow for long words */
 }
 
 .message.own {
   align-self: flex-end;
   background-color: #dcf8c6;
+  margin-left: 50%;
 }
 
 .message.other {
@@ -137,12 +162,32 @@ body {
   background-color: #fff;
 }
 
+.input-container textarea {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  resize: none; /* Prevent resizing */
+  max-height: 300px;
+  overflow: scroll;
+  font-size: 20px;
+}
+
+textarea:focus {
+  outline: none;
+}
+
 .input-container input {
   flex: 1;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-right: 10px;
+}
+
+input:focus {
+  outline: none;
 }
 
 .input-container button {
@@ -156,4 +201,15 @@ body {
 
 .input-container button:hover {
   background-color: #45a049;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
