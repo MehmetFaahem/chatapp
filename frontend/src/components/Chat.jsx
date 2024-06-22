@@ -132,7 +132,10 @@ const Chat = ({ token }) => {
           {activeUsers.map((user) => (
             <li
               key={user.userId}
-              onClick={() => setSelectedUser(user)}
+              onClick={() => {
+                setSelectedUser(user);
+                console.log(user);
+              }}
               style={{
                 backgroundColor:
                   user?.userId === selectedUser?.userId ? "gray" : "white",
@@ -149,21 +152,29 @@ const Chat = ({ token }) => {
       </div>
       <div className="chat-window">
         <div className="messages">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`message ${
-                message.senderName === decodedToken.userId ? "own" : "other"
-              }`}
-            >
-              <div className="message-content">
-                <strong>{message.senderName}: </strong> {message.message}
-                <div className="message-timestamp">
-                  {new Date(message.timestamp).toLocaleTimeString()}
+          {messages
+
+            .filter(
+              (mes) =>
+                mes.senderName === decodedToken.userId ||
+                selectedUser.email === mes.senderName
+            )
+            // .filter((mes) => selectedUser.email === mes.senderName)
+            .map((message, index) => (
+              <div
+                key={index}
+                className={`message ${
+                  message.senderName === decodedToken.userId ? "own" : "other"
+                }`}
+              >
+                <div className="message-content">
+                  <strong>{message.senderName}: </strong> {message.message}
+                  <div className="message-timestamp">
+                    {new Date(message.timestamp).toLocaleTimeString()}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
           <div ref={messagesEndRef} />
         </div>
         <div className="input-container">
