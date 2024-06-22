@@ -6,12 +6,12 @@ export default defineConfig({
   plugins: [react()],
   proxy: {
     "/socket.io": {
-      target: "https://kothonapi.vercel.app",
+      target: "https://belabosh.onrender.com",
       ws: true,
       changeOrigin: true,
     },
     "/users": {
-      target: "https://kothonapi.vercel.app",
+      target: "https://belabosh.onrender.com",
       changeOrigin: true,
     },
   },

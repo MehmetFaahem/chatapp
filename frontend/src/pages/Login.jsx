@@ -10,7 +10,7 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://kothonapi.vercel.app/auth/login",
+        "https://belabosh.onrender.com/auth/login",
         {
           email,
           password,

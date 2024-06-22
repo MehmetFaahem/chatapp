@@ -10,7 +10,7 @@ const Register = ({ onRegister }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://kothonapi.vercel.app/auth/register", {
+      await axios.post("https://belabosh.onrender.com/auth/register", {
         userName,
         email,
         password,

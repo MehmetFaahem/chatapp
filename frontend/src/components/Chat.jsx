@@ -26,7 +26,7 @@ const Chat = ({ token }) => {
     const fetchActiveUsers = async () => {
       try {
         const response = await axios.get(
-          `https://kothonapi.vercel.app/users/active/${currentUser}`
+          `https://belabosh.onrender.com/users/active/${currentUser}`
         );
         setActiveUsers(response.data);
       } catch (error) {
@@ -38,8 +38,9 @@ const Chat = ({ token }) => {
   }, [currentUser]);
 
   useEffect(() => {
-    socketRef.current = io("https://kothonapi.vercel.app", {
+    socketRef.current = io("https://belabosh.onrender.com", {
       query: { token },
+      transports: ["websocket", "polling"],
     });
 
     socketRef.current.on("connect", () => {
@@ -81,7 +82,7 @@ const Chat = ({ token }) => {
     const fetchMessages = async () => {
       if (selectedUser) {
         const response = await axios.get(
-          `https://kothonapi.vercel.app/messages/${selectedUser.userId}/${decodedToken.userId}`,
+          `https://belabosh.onrender.com/messages/${selectedUser.userId}/${decodedToken.userId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

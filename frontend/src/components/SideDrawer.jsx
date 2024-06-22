@@ -8,7 +8,7 @@ const Sidebar = ({ onClick }) => {
     const fetchActiveUsers = async () => {
       try {
         const response = await axios.get(
-          `https://kothonapi.vercel.app/users/active/${currentUser}`
+          `https://belabosh.onrender.com/users/active/${currentUser}`
         );
         setActiveUsers(response.data);
       } catch (error) {
