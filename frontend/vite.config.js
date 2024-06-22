@@ -6,12 +6,12 @@ export default defineConfig({
   plugins: [react()],
   proxy: {
     "/socket.io": {
-      target: "http://localhost:3000",
+      target: "https://kothonapi.vercel.app",
       ws: true,
       changeOrigin: true,
     },
     "/users": {
-      target: "http://localhost:3000",
+      target: "https://kothonapi.vercel.app",
       changeOrigin: true,
     },
   },

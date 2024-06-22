@@ -26,7 +26,7 @@ const Chat = ({ token }) => {
     const fetchActiveUsers = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/users/active/${currentUser}`
+          `https://kothonapi.vercel.app/users/active/${currentUser}`
         );
         setActiveUsers(response.data);
       } catch (error) {
@@ -38,7 +38,7 @@ const Chat = ({ token }) => {
   }, [currentUser]);
 
   useEffect(() => {
-    socketRef.current = io("http://localhost:3000", {
+    socketRef.current = io("https://kothonapi.vercel.app", {
       query: { token },
     });
 
@@ -81,7 +81,7 @@ const Chat = ({ token }) => {
     const fetchMessages = async () => {
       if (selectedUser) {
         const response = await axios.get(
-          `http://localhost:3000/messages/${selectedUser.userId}/${decodedToken.userId}`,
+          `https://kothonapi.vercel.app/messages/${selectedUser.userId}/${decodedToken.userId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
